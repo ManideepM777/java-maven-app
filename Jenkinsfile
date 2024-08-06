@@ -1,12 +1,7 @@
-#!/usr/bin/env groovy
-
 def gv
 
 pipeline {
     agent any
-    tools {
-        maven 'Maven'
-    }
     stages {
         stage("init") {
             steps {
@@ -16,25 +11,41 @@ pipeline {
             }
         }
         stage("build jar") {
+            when {
+                expression {
+                   Branch_Name == 'main'
+                }
+            }
             steps {
                 script {
-                    gv.buildJar()
+                    echo "building jar"
+                    //gv.buildJar()
                 }
             }
         }
         stage("build image") {
+            when {
+                expression {
+                    Branch_Name == 'main'
+            }
             steps {
                 script {
-                    gv.buildImage()
+                    echo "building image"
+                    //gv.buildImage()
                 }
             }
         }
         stage("deploy") {
+            when {
+                expression {
+                    Branch_Name == 'main'
+            }
             steps {
                 script {
-                    gv.deployApp()
+                    echo "deploying"
+                    //gv.deployApp()
                 }
             }
         }
-    }
+    }   
 }
