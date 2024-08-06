@@ -26,7 +26,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    buildImage 'manideepm777/demo-app-3.0'
+                    buildImage 'manideepm777/demo-app:3.0'
                 }
             }
         }
