@@ -1,4 +1,4 @@
-def build() {
+def buildApp() {
     echo "building the application..."
     sh 'mvn package'
 } 
@@ -12,7 +12,7 @@ def buildImage() {
     }
 } 
 
-def deploy() {
+def deployApp() {
     echo 'deploying the application...'
 } 
 
