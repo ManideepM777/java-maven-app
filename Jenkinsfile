@@ -19,18 +19,14 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    echo "building jar"
-                    buildJar()
-                    //gv.buildJar()
+                    buildJar()                  
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
-                    buildImage()
-                    //gv.buildImage()
+                    buildImage 'manideepm777/demo-app-3.0'
                 }
             }
         }
