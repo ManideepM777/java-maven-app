@@ -23,13 +23,16 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
-                    buildImage 'manideepm777/demo-app:3.0'
+                    buildImage 'manideepm777/demo-app:jma-4.0'
+                    dockerLogin()
+                    dockerPush 'manideepm777/demo-app:jma-4.0'
                 }
             }
         }
+
         stage("deploy") {
             steps {
                 script {
