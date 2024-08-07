@@ -5,7 +5,22 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    environment {
+        SKIP_CI = '[skip ci]'
+    }
     stages {
+        stage('Check Commit Message') {
+            steps {
+                script {
+                    def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    if (commitMessage.contains(env.SKIP_CI)) {
+                        echo 'Skipping build due to skip ci commit message'
+                        currentBuild.result = 'SUCCESS'
+                        error('Skipping further steps as it is a version increment commit')
+                    }
+                }
+            }
+        }
         stage('increment version') {
             steps {
                 script {
@@ -50,10 +65,9 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-access', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/ManideepM777/java-maven-app.git"
                         sh 'git add .'
-                        sh 'git commit -m "ci: version bump"'
+                        sh "git commit -m 'ci: version bump ${env.SKIP_CI}'"
                         sh 'git push origin HEAD:java-maven-version-increment'
                     }
                 }
