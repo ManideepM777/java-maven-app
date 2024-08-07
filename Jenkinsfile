@@ -11,6 +11,7 @@ pipeline {
         stage("init") {
             steps {
                 script {
+                    echo "building image"
                     gv = load "script.groovy"
                 }
             }
