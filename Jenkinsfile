@@ -63,7 +63,7 @@ pipeline {
             when {
                 expression {
                         return !env.GIT_COMMIT_MESSAGE.contains('ci: version bump')
-                    }
+
                 }
             }
         }
