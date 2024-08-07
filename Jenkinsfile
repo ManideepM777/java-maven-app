@@ -51,7 +51,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-access', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 
-
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/ManideepM777/java-maven-app.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
