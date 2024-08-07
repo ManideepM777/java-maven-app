@@ -59,25 +59,5 @@ pipeline {
                 }
             }
         }
-        stage('Set GIT_COMMIT_MESSAGE') {
-            steps {
-                script {
-                    env.GIT_COMMIT_MESSAGE = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
-                }
-            }
-        }
-        stage('Check for Version Bump') {
-            when {
-                expression {
-                    return env.GIT_COMMIT_MESSAGE.contains('ci: version bump')
-                }
-            }
-            steps {
-                script {
-                    echo 'Checking for version bump...'
-                    // Add additional steps if needed
-                }
-            }
-        }
     }
 }
