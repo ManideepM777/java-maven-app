@@ -66,6 +66,12 @@ pipeline {
 
                 }
             }
+            steps {
+                script {
+                    echo 'Checking for version bump...'
+                    // Add additional steps if needed
+                }
+            }
         }
     }
 }
