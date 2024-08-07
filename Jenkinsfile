@@ -1,4 +1,3 @@
-adjust my code:
 #!/usr/bin/env groovy
 
 pipeline {
